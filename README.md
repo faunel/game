@@ -24,3 +24,5 @@
 - Виграш відбувається відповідно правил
 
 <img src="https://github.com/faunel/game/blob/master/img/rules.png" width="500">
+
+- [Аккаунт](https://htmlpreview.github.io/?https://github.com/andrey-tech/amocrm-api-v2-docs/blob/master/docs/account.html) 
