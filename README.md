@@ -23,4 +23,4 @@
 
 - Виграш відбувається відповідно правил
 
-![Правила](https://github.com/faunel/game/blob/master/img/rules.png)
+<img src="https://github.com/faunel/game/blob/master/img/rules.png" width="500">
