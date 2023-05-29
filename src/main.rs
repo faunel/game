@@ -106,10 +106,6 @@ fn main() {
     }
 }
 
-// 1 => Some(Choice::Rock("Камінь".to_string())),
-// 2 => Some(Choice::Scissors("Ножиці".to_string())),
-// 3 => Some(Choice::Paper("Папір".to_string())),
-
 #[cfg(test)]
 mod tests {
     use super::*;
