@@ -8,7 +8,7 @@ struct Game {
     computer: Choice,
 }
 
-struct Result {
+struct GameResult {
     choice: Choice,
     name: String,
 }
@@ -46,17 +46,17 @@ impl Game {
 }
 
 impl Choice {
-    fn get_choice(num: u8) -> Option<Result> {
+    fn get_choice(num: u8) -> Option<GameResult> {
         match num {
-            1 => Some(Result {
+            1 => Some(GameResult {
                 choice: Choice::Rock,
                 name: "Камінь".to_string(),
             }),
-            2 => Some(Result {
+            2 => Some(GameResult {
                 choice: Choice::Scissors,
                 name: "Ножиці".to_string(),
             }),
-            3 => Some(Result {
+            3 => Some(GameResult {
                 choice: Choice::Paper,
                 name: "Папір".to_string(),
             }),
@@ -67,7 +67,7 @@ impl Choice {
 
 fn main() {
     loop {
-        println!("Введіть число (1: Камінь, 2: Ножиці, 3: Папір):");
+        print!("Введіть число (1: Камінь, 2: Ножиці, 3: Папір): ");
         let mut buffer = [0; 1];
 
         io::stdout().flush().unwrap(); // Очистка вихідного буфера
