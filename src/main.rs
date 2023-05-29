@@ -5,12 +5,12 @@ use std::io::{self, BufReader, Read, Write};
 
 struct Game {
     player: Choice,
-    computer: Choice
+    computer: Choice,
 }
 
 struct Result {
     choice: Choice,
-    name: String
+    name: String,
 }
 
 #[derive(Debug)]
@@ -28,8 +28,8 @@ enum Outcome {
 }
 
 impl Game {
-    fn new (player: Choice, computer: Choice) -> Game {
-        Game {player,  computer}
+    fn new(player: Choice, computer: Choice) -> Game {
+        Game { player, computer }
     }
 
     fn compare(&self) -> Outcome {
@@ -48,19 +48,19 @@ impl Game {
 impl Choice {
     fn get_choice(num: u8) -> Option<Result> {
         match num {
-            1 => Some(Result{ 
-                choice: Choice::Rock, 
-                name: "Камінь".to_string()
+            1 => Some(Result {
+                choice: Choice::Rock,
+                name: "Камінь".to_string(),
             }),
-            2 => Some(Result { 
-                choice: Choice::Scissors, 
-                name: "Ножиці".to_string()
+            2 => Some(Result {
+                choice: Choice::Scissors,
+                name: "Ножиці".to_string(),
             }),
-            3 => Some(Result { 
-                choice: Choice::Paper, 
-                name: "Папір".to_string()
+            3 => Some(Result {
+                choice: Choice::Paper,
+                name: "Папір".to_string(),
             }),
-            _ => None
+            _ => None,
         }
     }
 }
@@ -69,7 +69,7 @@ fn main() {
     loop {
         println!("Введіть число (1: Камінь, 2: Ножиці, 3: Папір):");
         let mut buffer = [0; 1];
-        
+
         io::stdout().flush().unwrap(); // Очистка вихідного буфера
 
         let stdin = io::stdin();
@@ -83,9 +83,9 @@ fn main() {
                     None => {
                         println!("Не число");
                         continue;
-                    },
+                    }
                 };
-                   
+
                 let player = match Choice::get_choice(input) {
                     Some(s) => s,
                     None => {
@@ -106,15 +106,30 @@ fn main() {
                 let game = Game::new(player.choice, computer.choice);
 
                 match game.compare() {
-                    Outcome::Win => println!("{}. Ви: {}, Комп'ютер: {}", "Ви виграли".green().bold(), player.name, computer.name),
-                    Outcome::Lose => println!("{}. Ви: {}, Комп'ютер: {}", "Ви програли".red().bold(), player.name, computer.name),
-                    Outcome::Draw => println!("{}. Ви: {}, Комп'ютер: {}", "Нічия".yellow().bold(), player.name, computer.name),
+                    Outcome::Win => println!(
+                        "{}. Ви: {}, Комп'ютер: {}",
+                        "Ви виграли".green().bold(),
+                        player.name,
+                        computer.name
+                    ),
+                    Outcome::Lose => println!(
+                        "{}. Ви: {}, Комп'ютер: {}",
+                        "Ви програли".red().bold(),
+                        player.name,
+                        computer.name
+                    ),
+                    Outcome::Draw => println!(
+                        "{}. Ви: {}, Комп'ютер: {}",
+                        "Нічия".yellow().bold(),
+                        player.name,
+                        computer.name
+                    ),
                 }
-            },
+            }
             Err(e) => {
                 println!("Помилка: {}", e);
                 break;
-            },
+            }
         }
     }
 }
@@ -125,45 +140,73 @@ mod tests {
 
     #[test]
     fn test_win_scissors_paper() {
-        assert_eq!(Game::new(Choice::Scissors, Choice::Paper).compare(), Outcome::Win);
+        assert_eq!(
+            Game::new(Choice::Scissors, Choice::Paper).compare(),
+            Outcome::Win
+        );
     }
 
     #[test]
     fn test_win_paper_rock() {
-        assert_eq!(Game::new(Choice::Paper, Choice::Rock).compare(), Outcome::Win);
+        assert_eq!(
+            Game::new(Choice::Paper, Choice::Rock).compare(),
+            Outcome::Win
+        );
     }
 
     #[test]
     fn test_win_rock_scissors() {
-        assert_eq!(Game::new(Choice::Rock, Choice::Scissors).compare(), Outcome::Win);
+        assert_eq!(
+            Game::new(Choice::Rock, Choice::Scissors).compare(),
+            Outcome::Win
+        );
     }
 
     #[test]
     fn test_lose_paper_scissors() {
-        assert_eq!(Game::new(Choice::Paper, Choice::Scissors).compare(), Outcome::Lose);
+        assert_eq!(
+            Game::new(Choice::Paper, Choice::Scissors).compare(),
+            Outcome::Lose
+        );
     }
 
     #[test]
     fn test_lose_scissors_rock() {
-        assert_eq!(Game::new(Choice::Scissors, Choice::Rock).compare(), Outcome::Lose);
+        assert_eq!(
+            Game::new(Choice::Scissors, Choice::Rock).compare(),
+            Outcome::Lose
+        );
     }
 
     #[test]
     fn test_lose_rock_paper() {
-        assert_eq!(Game::new(Choice::Rock, Choice::Paper).compare(), Outcome::Lose);
+        assert_eq!(
+            Game::new(Choice::Rock, Choice::Paper).compare(),
+            Outcome::Lose
+        );
     }
 
     #[test]
     fn test_draw_scissors_scissors() {
-        assert_eq!(Game::new(Choice::Scissors, Choice::Scissors).compare(), Outcome::Draw);
+        assert_eq!(
+            Game::new(Choice::Scissors, Choice::Scissors).compare(),
+            Outcome::Draw
+        );
     }
 
     #[test]
-    fn test_draw_paper_paper() {assert_eq!(Game::new(Choice::Paper, Choice::Paper).compare(), Outcome::Draw);
+    fn test_draw_paper_paper() {
+        assert_eq!(
+            Game::new(Choice::Paper, Choice::Paper).compare(),
+            Outcome::Draw
+        );
     }
 
     #[test]
     fn test_draw_rock_rock() {
-        assert_eq!(Game::new(Choice::Rock, Choice::Rock).compare(), Outcome::Draw);
+        assert_eq!(
+            Game::new(Choice::Rock, Choice::Rock).compare(),
+            Outcome::Draw
+        );
     }
 }
