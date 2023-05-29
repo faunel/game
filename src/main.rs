@@ -13,7 +13,6 @@ struct GameResult {
     name: String,
 }
 
-#[derive(Debug)]
 enum Choice {
     Rock,
     Paper,
@@ -107,22 +106,22 @@ fn main() {
 
                 match game.compare() {
                     Outcome::Win => println!(
-                        "{}. Ви: {}, Комп'ютер: {}",
+                        "{}. Ви: {}, Комп'ютер: {}\n",
                         "Ви виграли".green().bold(),
-                        player.name,
-                        computer.name
+                        player.name.purple(),
+                        computer.name.cyan()
                     ),
                     Outcome::Lose => println!(
-                        "{}. Ви: {}, Комп'ютер: {}",
+                        "{}. Ви: {}, Комп'ютер: {}\n",
                         "Ви програли".red().bold(),
-                        player.name,
-                        computer.name
+                        player.name.purple(),
+                        computer.name.cyan()
                     ),
                     Outcome::Draw => println!(
-                        "{}. Ви: {}, Комп'ютер: {}",
+                        "{}. Ви: {}, Комп'ютер: {}\n",
                         "Нічия".yellow().bold(),
-                        player.name,
-                        computer.name
+                        player.name.purple(),
+                        computer.name.cyan()
                     ),
                 }
             }
